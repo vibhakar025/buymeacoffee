@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/9d26131055.js" crossorigin="anonymous"></script>
+	<title>Buy me a coffee</title>
+	<style>
+    @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Pacifico&display=swap');
+	* {
+		box-sizing: border-box;
+		padding: 0px;
+		margin: 0px;
+        font-family: 'Pacifico', cursive;
+    }
+	html,
+	body {
+		height: 100%;
+	}
+	body {
+        background-image: linear-gradient( 135deg, #FFE985 10%, #FA742B 100%);
+        display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.card {
+		background-color: white;
+		padding: 25px;
+		border: 1px solid #bbbbbb;
+		border-radius: 5px;
+		box-shadow: 1px 1px 10px 0px rgb(0 0 0 / 25%);
+        font-size: larger;
+	}
+	.title {
+		text-align: center;
+		letter-spacing: 1px;
+	}
+	.muted {
+		color: #8e7f7f;
+		display: block;
+        padding: 20px;
+		text-align: center;
+        font-family: 'Balsamiq Sans', cursive;
+	}
+	.btn_container {
+		padding: 20px;
+		text-align: center;
+	}
+	.btn {
+		border-radius: 4px;
+		cursor: pointer;
+		padding: 8px 10px;
+		background-color: #1E7B33;
+        font-family: 'Balsamiq Sans', cursive;
+		color: white;
+		font-size: 1.2em;
+	}
+    .fas{
+        padding-left: 10px;
+    }
+	</style>
+</head>
+<body>
+	<div class="card">
+	<h1 class="title">Buy Me A Coffee <i class="fas fa-mug-hot"></i></h1>
+	<small class="muted"
+		>If you like my work, you can support me by donating ₹200</small>
+	<div class="btn_container">
+		<!-- Payment Button -->
+		<button class="btn" id="pay-btn">Donate<i class="fas fa-hand-holding-heart"></i></button>
+	</div>
+	</div>
+</body>
+
+<!-- Razorpay's Javascript code. -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+	var options = {
+	
+	// Enter the Key ID generated from the Dashboard
+	key: "{{ razorpay_merchant_key }}",
+	
+	// Amount is in currency subunits.
+	// Default currency is INR. Hence,
+	// 50000 refers to 50000 paise
+	amount: "{{ razorpay_amount }}",
+	currency: "{{ currency }}",
+	
+	// Your/store name.
+	name: "Vibhakar",
+	
+	// Pass the `id` obtained in the response of Step 1
+	order_id: "{{ razorpay_order_id }}",
+	callback_url: "{{ callback_url }}",
+	};
+	
+	// initialise razorpay with the options.
+	var rzp1 = new Razorpay(options);
+	
+	// add event listener to the payment button.
+	document.getElementById("pay-btn").onclick = function (e) {
+	rzp1.open();
+	e.preventDefault();
+	};
+</script>
+</html>
