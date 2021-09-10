@@ -114,8 +114,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-RAZOR_KEY_ID = 'rzp_test_1zfahtBfuQYDQM'
-RAZOR_KEY_SECRET = 'AVWH5ulvLGQq9RVh46eUKMY3'
+RAZOR_KEY_ID = os.environ.get('RAZOR_KEY_ID')
+RAZOR_KEY_SECRET = os.environ.get('RAZOR_KEY_SECRET')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
